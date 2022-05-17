@@ -1,0 +1,81 @@
+watch: {
+'$route': 'syncRoute'
+}
+
+async syncRoute(){
+  const {params,query} = this.$route
+  const {data} = await axios.get('/my/route', {params: {
+    ...params, 
+    ...query
+  }})
+}
+
+<router-link :to="{query: {tabA}}">tabA</router-link>
+<router-link :to="{query: {tabB}}">tabB</router-link>
+<router-link :to="{query: {tabC}}">tabC</router-link>
+
+//disable auth WEB routes
+
+/*
+[
+  {
+    "id":309,"type":"state","centerPoint":null,"country":32,
+    "children":[
+      {"id":109958,"type":"city","centerPoint":null,"country":32,"description":{"es":"11 de Septiembre"},
+        "fullName":{"es":"11 de Septiembre, Buenos Aires, Pampeana, Argentina"},
+        "slug":{"es":"11-de-septiembre"}},
+      {"id":109960,"type":"city","centerPoint":null,"country":32,"description":{"es":"12 de Octubre"},
+        "fullName":{"es":"12 de Octubre, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"12-de-octubre"}},
+      {"id":109962,"type":"city","centerPoint":null,"country":32,"description":{"es":"16 de Julio"},
+        "fullName":{"es":"16 de Julio, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"16-de-julio"}},
+      {"id":109963,"type":"city","centerPoint":null,"country":32,"description":{"es":"17 de Agosto"},
+        "fullName":{"es":"17 de Agosto, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"17-de-agosto"}},
+      {"id":109967,"type":"city","centerPoint":null,"country":32,"description":{"es":"20 de Junio"},
+        "fullName":{"es":"20 de Junio, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"20-de-junio"}},
+      {"id":109968,"type":"city","centerPoint":null,"country":32,"description":{"es":"25 de Mayo"},
+        "fullName":{"es":"25 de Mayo, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"25-de-mayo"}},
+      {"id":109976,"type":"city","centerPoint":null,"country":32,"description":{"es":"30 de Agosto"},
+        "fullName":{"es":"30 de Agosto, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"30-de-agosto"}},
+      {"id":109984,"type":"city","centerPoint":null,"country":32,"description":{"es":"9 de Abril"},
+        "fullName":{"es":"9 de Abril, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"9-de-abril"}},
+      {"id":109985,"type":"city","centerPoint":null,"country":32,"description":{"es":"9 de Julio"},
+        "fullName":{"es":"9 de Julio, Buenos Aires, Pampeana, Argentina"},"slug":{"es":"9-de-julio"}}]
+*/
+
+[{"id":303,"type":"country","centerPoint":null,"country":32,"children":[{"id":304,"type":"region","centerPoint":null,"country":32,"description":{"es":"Cuyo"},"fullName":{"es":"Cuyo, Argentina"},"slug":{"es":"cuyo"}},{"id":305,"type":"region","centerPoint":null,"country":32,"description":{"es":"Noreste"},"fullName":{"es":"Noreste, Argentina"},"slug":{"es":"noreste"}},{"id":306,"type":"region","centerPoint":null,"country":32,"description":{"es":"Noroeste"},"fullName":{"es":"Noroeste, Argentina"},"slug":{"es":"noroeste"}},{"id":307,"type":"region","centerPoint":null,"country":32,"description":{"es":"Pampeana"},"fullName":{"es":"Pampeana, Argentina"},"slug":{"es":"pampeana"}},{"id":308,"type":"region","centerPoint":null,"country":32,"description":{"es":"Patagónica"},"fullName":{"es":"Patagónica, Argentina"},"slug":{"es":"patagonica"}}],"description":{"es":"Argentina"},"fullName":{"es":"Argentina"},"slug":{"es":"argentina"}}]
+
+
+
+
+
+
+{id: "d48c7ae7d3d4e0c62657ffc19c1132e8", legalName: "HELICOPTER ENGINE SERVICE S.A.", tradeName: "",…}
+background: "/backgrounds/1527201730_jvWMbeIK1t.jpg"
+badges: [{type: "duns_registered"}]
+description: {,…}
+employeeCount: "1 - 20"
+facebook: "https://www.facebook.com/Helicopter-Engine-Service-SA-643249029082638/?fref=ts"
+foundingDate: "2006"
+googleplus: ""
+hideEmail: false
+hidePhone: false
+id: "d48c7ae7d3d4e0c62657ffc19c1132e8"
+instagram: ""
+isHidden: false
+latitude: 35.0826103
+legalEntity: ""
+legalName: "HELICOPTER ENGINE SERVICE S.A."
+linkedin: "https://www.linkedin.com/in/fernando-cabrera-a8a67713/"
+location: "Avenida Presidente Hipólito Yrigoyen 1783, 1646, San Fernando, Buenos Aires, Argentina"
+logo: "/logos/1527201569_uI7fzhjqdI.jpg"
+longitude: -106.8165629
+primaryName: "HELICOPTER ENGINE SERVICE S.A."
+secondaryName: ""
+shortLocation: "San Fernando, Buenos Aires, Argentina"
+slug: "helicopter-engine-service-sa"
+taxId: "30710512996"
+tradeName: ""
+twitter: ""
+useTradeNameAsPrimary: false
+website: "www.hessa.com.ar/"
+youtube: ""

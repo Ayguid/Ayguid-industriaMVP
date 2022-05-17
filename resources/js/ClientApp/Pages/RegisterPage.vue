@@ -1,0 +1,222 @@
+<template>
+    <b-container>
+        <div class="blah">
+            <b-card title="Register" sub-title="">
+                <b-card-text>
+                    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                        <b-form-group
+                            id="input-group-1"
+                            label="Email address:"
+                            label-for="input-1"
+                            description="We'll never share your email with anyone else."
+                        >
+                            <b-form-input
+                                id="input-1"
+                                v-model="form.email"
+                                type="email"
+                                placeholder="Enter email"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.email"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-1"
+                            label="Username:"
+                            label-for="input-1"
+                            description=""
+                        >
+                            <b-form-input
+                                id="input-1"
+                                v-model="form.username"
+                                type="text"
+                                placeholder="Enter a username"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.username"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-2"
+                            label="Your Name:"
+                            label-for="input-2"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.name"
+                                placeholder="Enter name"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.name"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-2"
+                            label="A job description:"
+                            label-for="input-2"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.job_description"
+                                placeholder="Enter a job description"
+                            ></b-form-input>
+                            <p
+                                class="text-danger"
+                                v-text="errors.job_description"
+                            ></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-2"
+                            label="Your phone:"
+                            label-for="input-2"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.phone"
+                                placeholder="Enter a phone number"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.phone"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-2"
+                            label="Your cellphone:"
+                            label-for="input-2"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.cellphone"
+                                placeholder="Enter a cellphone number"
+                            ></b-form-input>
+                            <p
+                                class="text-danger"
+                                v-text="errors.cellphone"
+                            ></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-2"
+                            label="Your address:"
+                            label-for="input-2"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.address"
+                                placeholder="Enter an address"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.address"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-3"
+                            label="Your Pass:"
+                            label-for="input-3"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.password"
+                                placeholder="Enter pass"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.password"></p>
+                        </b-form-group>
+
+                        <b-form-group
+                            id="input-group-4"
+                            label="Your Pass Confirm:"
+                            label-for="input-4"
+                        >
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.password_confirmation"
+                                placeholder="Enter pass confirmation"
+                            ></b-form-input>
+                            <p class="text-danger" v-text="errors.password"></p>
+                        </b-form-group>
+
+                        <b-overlay
+                            :show="busy"
+                            rounded
+                            opacity="0.6"
+                            spinner-small
+                            spinner-variant="primary"
+                            class="d-inline-block"
+                        >
+                            <b-button
+                                class="mr-1"
+                                type="submit"
+                                variant="primary"
+                                >Submit</b-button
+                            >
+                        </b-overlay>
+                        <!--
+      <b-button type="reset" variant="danger">Reset</b-button>
+      -->
+                    </b-form>
+
+                    <p class="p-2">
+                        Have an account? <b-link to="/login">Login</b-link>
+                    </p>
+                </b-card-text>
+            </b-card>
+        </div>
+    </b-container>
+</template>
+
+<script>
+export default {
+    name: "RegisterPage",
+    data() {
+        return {
+            busy: false,
+            show: true,
+            form: {
+                email: "",
+                username: "",
+                name: "",
+                job_description: "",
+                phone: "",
+                cellphone: "",
+                address: "",
+                password: "",
+                password_confirmation: "",
+            },
+            errors: {},
+        };
+    },
+    components: {},
+    computed: {},
+    watch: {},
+    methods: {
+        async onSubmit(event) {
+            event.preventDefault();
+            this.busy = true;
+            try {
+                let newObj = JSON.parse(JSON.stringify(this.form));
+                await this.$store.dispatch("registerUser", newObj);
+                await this.$store.dispatch("login", newObj);
+                this.$router.push("/");
+            } catch (ex) {
+                this.errors = ex.response.data.errors; //.data.errors;
+            } finally {
+                this.busy = false;
+            }
+        },
+        onReset(event) {
+            event.preventDefault();
+            // Reset our form values
+            this.errors = {};
+            this.form.email = "";
+            this.form.name = "";
+            this.form.username = "";
+            this.form.phone = "";
+            this.form.cellphone = "";
+            this.form.address = "";
+            this.form.password = "";
+            this.form.passwordconfirm = "";
+            // Trick to reset/clear native browser form validation state
+            this.show = false;
+            this.$nextTick(() => {
+                this.show = true;
+            });
+        },
+    },
+};
+</script>
