@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\user;
+use App\Models\Post;
 use App\Models\EntityCategory;
 //use App\Models\UserBookmark;
 use App\Models\Location;
@@ -101,5 +102,10 @@ class Entity extends Model
     public function city()
     {
         return  $this->belongsTo(Location::class, "city_id");
+    }
+
+    public function posts()
+    {
+        return $this->morphMany(Post::class, 'model');
     }
 }

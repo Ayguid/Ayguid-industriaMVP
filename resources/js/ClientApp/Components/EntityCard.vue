@@ -101,6 +101,8 @@ export default {
                     "bookmarkEntity",
                     this.entity
                 );
+                this.entity.bookmarks_count = response.data.bookmarks_count;
+                console.log(response);
             } catch (ex) {
                 this.$bvToast.toast(ex.response.data.message, {
                     title: `Errors:`,

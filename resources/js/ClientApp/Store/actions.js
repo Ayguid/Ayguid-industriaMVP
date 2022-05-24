@@ -71,7 +71,7 @@ const actions = {
   async getEntity({ commit }, username) {
     //console.log('get bookmarks')
     //no lo persisitimos en el store
-    const res = await axios.get('/api/entities/entity?username=' + username)
+    const res = await axios.get('/api/entities/' + username)
     //console.log(res.data)
     //commit('SET_USER_BOOKMARKS', res.data)
     return res
@@ -90,7 +90,28 @@ const actions = {
     commit('UPDATE_ENTITY', res.data)
     return res;
   },
-
+  async deletePost({ commit }, payload) {
+    //console.log(payload);
+    const res = await axios.delete('/api/posts/' + payload)
+    //console.log(res);
+    //commit('UPDATE_ENTITY', res.data)
+    return res;
+  },
+  //bookmarks
+  async bookmarkEntity({ commit }, payload) {
+    //console.log(payload);
+    const res = await axios.post('/api/bookmarkEntity/' + payload.id)
+    //console.log(res.data);
+    commit('BOOKMARK_ENTITY', res.data)
+    return res;
+  },
+  async getUserBookmarks({ commit }) {
+    //console.log('get bookmarks')
+    const res = await axios.get('/api/userBookmarks/' + this.state.user.id)
+    //console.log(res.data)
+    commit('SET_USER_BOOKMARKS', res.data)
+    return res
+  },
 }
 
 export default actions

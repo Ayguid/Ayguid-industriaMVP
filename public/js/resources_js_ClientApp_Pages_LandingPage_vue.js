@@ -4407,11 +4407,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 12:
                 response = _context.sent;
-                _context.next = 19;
+                _this.entity.bookmarks_count = response.data.bookmarks_count;
+                console.log(response);
+                _context.next = 21;
                 break;
 
-              case 15:
-                _context.prev = 15;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](9);
 
                 _this.$bvToast.toast(_context.t0.response.data.message, {
@@ -4422,16 +4424,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.errors = _context.t0.response.data.errors;
 
-              case 19:
-                _context.prev = 19;
-                return _context.finish(19);
-
               case 21:
+                _context.prev = 21;
+                return _context.finish(21);
+
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[9, 15, 19, 21]]);
+        }, _callee, null, [[9, 17, 21, 23]]);
       }))();
     }
   },
@@ -4439,60 +4441,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
     this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1); //console.log(this.$route.name == "UserBookmarks");
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//import axios from "axios";
-//import { debounce } from "lodash";
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "InfiniteScroll",
-  //emits:['loadMore'],
-  props: {
-    loadMore: Function
-  },
-  data: function data() {
-    return {
-      loading: false
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    window.addEventListener("scroll", _.debounce(function (e) {
-      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-      if (pixelsFromBottom < 200 && !_this.loading) {
-        //console.log(this.myPostsAndFollowingPosts.next_page_url);
-        //console.log(12);
-        //this.$emit('loadMore');
-        _this.loading = true;
-
-        _this.loadMore()["finally"](function () {
-          return _this.loading = false;
-        });
-      }
-    }, 100));
   }
 });
 
@@ -4729,7 +4677,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Components_MainFilter_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/MainFilter.vue */ "./resources/js/ClientApp/Components/MainFilter.vue");
 /* harmony import */ var _Components_EntityCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/EntityCard.vue */ "./resources/js/ClientApp/Components/EntityCard.vue");
-/* harmony import */ var _Components_InfiniteScroll_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/InfiniteScroll.vue */ "./resources/js/ClientApp/Components/InfiniteScroll.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4795,8 +4742,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
-
- //import { nextTick } from "process";
+ //import InfiniteScroll from "../Components/InfiniteScroll.vue";
+//import { nextTick } from "process";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LandingPage",
@@ -4807,8 +4754,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   components: {
     MainFilter: _Components_MainFilter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EntityCard: _Components_EntityCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    InfiniteScroll: _Components_InfiniteScroll_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    EntityCard: _Components_EntityCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"] //InfiniteScroll,
+
   },
   data: function data() {
     return {
@@ -6224,45 +6171,6 @@ component.options.__file = "resources/js/ClientApp/Components/EntityCard.vue"
 
 /***/ }),
 
-/***/ "./resources/js/ClientApp/Components/InfiniteScroll.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/ClientApp/Components/InfiniteScroll.vue ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InfiniteScroll.vue?vue&type=template&id=c017441a& */ "./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a&");
-/* harmony import */ var _InfiniteScroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InfiniteScroll.vue?vue&type=script&lang=js& */ "./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _InfiniteScroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__.render,
-  _InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/ClientApp/Components/InfiniteScroll.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/ClientApp/Components/LocationSearch.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/ClientApp/Components/LocationSearch.vue ***!
@@ -6416,22 +6324,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InfiniteScroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InfiniteScroll.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InfiniteScroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/js/ClientApp/Components/LocationSearch.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************!*\
   !*** ./resources/js/ClientApp/Components/LocationSearch.vue?vue&type=script&lang=js& ***!
@@ -6536,23 +6428,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EntityCard_vue_vue_type_template_id_290be4f6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EntityCard_vue_vue_type_template_id_290be4f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EntityCard.vue?vue&type=template&id=290be4f6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/EntityCard.vue?vue&type=template&id=290be4f6&");
-
-
-/***/ }),
-
-/***/ "./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a& ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfiniteScroll_vue_vue_type_template_id_c017441a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InfiniteScroll.vue?vue&type=template&id=c017441a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a&");
 
 
 /***/ }),
@@ -6787,43 +6662,6 @@ var render = function () {
       ),
     ],
     1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/ClientApp/Components/InfiniteScroll.vue?vue&type=template&id=c017441a& ***!
-  \************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._t("default"),
-      _vm._v(" "),
-      _vm.loading
-        ? _c("div", { staticClass: "p-4 text-center text-gray-600" }, [
-            _vm._v("\n        Loading More...\n    "),
-          ])
-        : _vm._e(),
-    ],
-    2
   )
 }
 var staticRenderFns = []

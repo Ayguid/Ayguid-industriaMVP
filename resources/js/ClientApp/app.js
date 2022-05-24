@@ -16,7 +16,11 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 //import "@/assets/css/custom.css";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-Vue.component('v-select', vSelect)
+Vue.component('v-select', vSelect);
+//
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
+Vue.component('enlargeable-image', EnlargeableImage)
+//
 Vue.use(VueRouter)
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);

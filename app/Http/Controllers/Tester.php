@@ -101,7 +101,7 @@ class Tester extends Controller
     {
         //$json = Storage::disk('local')->get('jsons/localidades.json');
         //return $collection = (new Collection(json_decode($json, true)['localidades']))->where("id", "06021010000")->paginate(10);
-
+        //return Entity::where('id', 41)->first()->posts;
         $reso = Entity::where('id', 1)->first();
         return response($reso);
         /* crea el admin role

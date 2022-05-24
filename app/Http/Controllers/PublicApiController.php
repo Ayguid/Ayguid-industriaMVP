@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Entity;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Support\Collection; //herramienta para paginear jsons
@@ -89,6 +90,7 @@ class PublicApiController extends Controller
         //return $request->all();
         # code...
         $paginate = 9;
+        $user_id = $request->user('sanctum')->id;
         //return response($request['catIds']);
         //$retu = [];
         /* MEJROAR ESTOS QUERIES, SE PUEDE HACER TODO EN UNO */
@@ -103,8 +105,8 @@ class PublicApiController extends Controller
             })
                 ->with(['user', 'categories'])->withCount([
                     'bookmarks',
-                    'bookmarks as bookmarked' => function ($q) {
-                        $q->where('user_id', auth()->id());
+                    'bookmarks as bookmarked' => function ($q) use ($user_id) {
+                        $q->where('user_id', $user_id);
                     }
                 ])->withCasts(['bookmarks' => 'boolean']); //el appends request query es para que nos vuelvan los parametros del filtro que fueron por get request
         }
@@ -115,8 +117,8 @@ class PublicApiController extends Controller
             $entities = Entity::where('country_id', $locationsArray)->orWhere('state_id', $locationsArray)->orWhere('city_id', $locationsArray)
                 ->with(['user', 'categories'])->withCount([
                     'bookmarks',
-                    'bookmarks as bookmarked' => function ($q) {
-                        $q->where('user_id', auth()->id());
+                    'bookmarks as bookmarked' => function ($q) use ($user_id) {
+                        $q->where('user_id', $user_id);
                     }
                 ])->withCasts(['bookmarks' => 'boolean']); //el appends request query es para que nos vuelvan los parametros del filtro que fueron por get request
         }
@@ -131,8 +133,8 @@ class PublicApiController extends Controller
                     return $query->whereIn('category_id', $catsArrayIds)->orWhere('parent_id', $catsArrayIds);
                 })->with(['user', 'categories'])->withCount([
                     'bookmarks',
-                    'bookmarks as bookmarked' => function ($q) {
-                        $q->where('user_id', auth()->id());
+                    'bookmarks as bookmarked' => function ($q) use ($user_id) {
+                        $q->where('user_id', $user_id);
                     }
                 ])->withCasts(['bookmarks' => 'boolean']); //el appends request query es para que nos vuelvan los parametros del filtro que fueron por get request
             //
@@ -142,8 +144,8 @@ class PublicApiController extends Controller
             //array_push($retu, 4);
             $entities = Entity::with(['user', 'categories'])->withCount([
                 'bookmarks',
-                'bookmarks as bookmarked' => function ($q) {
-                    $q->where('user_id', auth()->id());
+                'bookmarks as bookmarked' => function ($q) use ($user_id) {
+                    $q->where('user_id', $user_id);
                 }
             ])->withCasts(['bookmarks' => 'boolean']);
         }
@@ -153,9 +155,15 @@ class PublicApiController extends Controller
     //
     //
     //
-    public function showEntity(Request $request)
+    public function showEntity(Request $request, Entity $entity)
     {
-        return Entity::where('username', $request['username'])->withCount('bookmarks')->first();
+        if ($request['page']) { //sacamos el count de bookmarks en los req de posts pagineados
+            $entity = $entity;
+        } else {
+            $entity = Entity::where('username', $entity->username)->withCount('bookmarks')->first();
+        }
+        $entity->posts = $entity->posts()->latest()->paginate(8)->appends(request()->query());
+        return $entity;
     }
     //
 

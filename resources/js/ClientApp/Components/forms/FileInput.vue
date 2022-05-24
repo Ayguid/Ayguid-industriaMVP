@@ -32,7 +32,7 @@ export default {
             this.$refs.picker.click();
         },
         change(event) {
-            this.$emit("input", event.target.files);
+            this.$emit("filesdAdded", event.target.files);
         },
     },
 };

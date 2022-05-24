@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicApiController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserBookmarkController;
 /*
@@ -55,7 +56,7 @@ Route::get('/categories', [PublicApiController::class, 'categories']);
 //
 //public entity listing
 Route::get('/entities', [PublicApiController::class, 'entitiesListing']);
-Route::get('/entities/entity', [PublicApiController::class, 'showEntity']);
+Route::get('/entities/{entity:username}', [PublicApiController::class, 'showEntity']);
 //
 //Entities del user, no son la public api
 Route::get('/user/entities', [EntityController::class, 'index'])->middleware('auth:sanctum');
@@ -64,8 +65,18 @@ Route::put('/user/entities/{entity}', [EntityController::class, 'update'])->midd
 Route::delete('/user/entities/{entity}', [EntityController::class, 'destroy'])->middleware('auth:sanctum');
 //Route::post('/storeEntity', [EntityController::class, 'store'])->middleware('auth:sanctum');
 //Route::post('/updateEntity/{entity}', [EntityController::class, 'update'])->middleware('auth:sanctum');
-//Route::post('/bookmarkEntity/{entity}', [UserBookmarkController::class, 'toggle'])->middleware('auth:sanctum');
-//Route::get('/userBookmarks/{id}', [UserBookmarkController::class, 'userBookmarks']);
+Route::post('/bookmarkEntity/{entity}', [UserBookmarkController::class, 'toggle'])->middleware('auth:sanctum');
+Route::get('/userBookmarks/{id}', [UserBookmarkController::class, 'userBookmarks']);
+//
+//POSTS
+Route::get('/posts', [PostController::class, 'index']);
+Route::post('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware('auth:sanctum');
+//Route::put('/posts/{post}', [PostController::class, 'update'])->middleware('auth:sanctum');
+//Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware('auth:sanctum');
+
+
+
 
 //////////// Admin   //////////////////////////
 //materials

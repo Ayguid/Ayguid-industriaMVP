@@ -59,7 +59,7 @@
 <script>
 import MainFilter from "../Components/MainFilter.vue";
 import EntityCard from "../Components/EntityCard.vue";
-import InfiniteScroll from "../Components/InfiniteScroll.vue";
+//import InfiniteScroll from "../Components/InfiniteScroll.vue";
 //import { nextTick } from "process";
 export default {
     name: "LandingPage",
@@ -71,7 +71,7 @@ export default {
     components: {
         MainFilter,
         EntityCard,
-        InfiniteScroll,
+        //InfiniteScroll,
     },
     data() {
         return {

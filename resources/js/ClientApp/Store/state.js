@@ -14,9 +14,11 @@ const state = {
       data: []
     },
     categories: [],
+    /*
     entities: {
       data: []
     }
+    */
   }
 }
 

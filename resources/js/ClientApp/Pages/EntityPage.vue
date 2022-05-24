@@ -116,8 +116,71 @@
                                     <p class="text-muted h3">
                                         <cite>{{ entity.description }}</cite>
                                     </p>
-                                    <PostCreateForm /></div
-                            ></b-tab>
+                                    <PostCreateForm
+                                        v-if="
+                                            entity.user_id ==
+                                            $store.state.user.id
+                                        "
+                                        @postSubmitted="addPost"
+                                        :entity="entity"
+                                    />
+                                    <hr />
+                                    <infinite-scroll :loadMore="loadMorePosts">
+                                        <b-card
+                                            class="mb-2"
+                                            v-if="entity"
+                                            v-for="(post, i) in entity.posts
+                                                .data"
+                                            :key="i"
+                                            title="Date"
+                                            :sub-title="post.created_at"
+                                        >
+                                            <enlargeable-image
+                                                v-for="(img, i) in post.media"
+                                                :key="i"
+                                                :src="img.full_url"
+                                                alt=""
+                                                width="100%"
+                                                :src_large="img.full_url"
+                                            />
+                                            <!--
+                                            <img
+                                                v-for="(img, i) in post.media"
+                                                :src="img.full_url"
+                                                alt=""
+                                                width="100%"
+                                            />
+                                            -->
+                                            <b-card-text
+                                                style="white-space: pre-line"
+                                            >
+                                                {{ post.content }}
+                                            </b-card-text>
+
+                                            <b-card-text
+                                                >A second paragraph of text in
+                                                the card.</b-card-text
+                                            >
+
+                                            <div
+                                                v-if="
+                                                    $store.state.user.id ==
+                                                    entity.user_id
+                                                "
+                                            >
+                                                <b-link
+                                                    @click="
+                                                        destroyPost(post.id)
+                                                    "
+                                                    href="#"
+                                                    class="card-link"
+                                                    >Delete</b-link
+                                                >
+                                            </div>
+                                        </b-card>
+                                    </infinite-scroll>
+                                </div>
+                            </b-tab>
                             <b-tab title="Location"
                                 ><div class="second_tab">Location</div></b-tab
                             >
@@ -134,18 +197,27 @@
 </template>
 <script>
 import PostCreateForm from "../Components/forms/PostCreateForm.vue";
+import InfiniteScroll from "../Components/InfiniteScroll.vue";
+
 export default {
     name: "EntityPage",
-    props: ["username"],
+    //props: ["username"],
+    props: {
+        username: String,
+    },
     metaInfo: {
         // title will be injected into parent titleTemplate
         title: "Entity Page",
         titleTemplate: null,
     },
-    components: { PostCreateForm },
+    components: { PostCreateForm, InfiniteScroll },
     data() {
         return {
-            entity: {},
+            entity: {
+                posts: {
+                    data: [],
+                },
+            },
         };
     },
     beforeRouteEnter(to, from, next) {
@@ -157,6 +229,8 @@ export default {
             vm.getEntity(vm.username);
         });
     },
+    watch: {},
+    computed: {},
     methods: {
         async getEntity(username) {
             //showEntity
@@ -174,7 +248,140 @@ export default {
             } finally {
             }
         },
+        loadMorePosts() {
+            console.log("try", this.entity.posts.next_page_url);
+            if (!this.entity.posts.next_page_url) {
+                return Promise.resolve();
+            }
+            //console.log("Getting");
+            return axios
+                .get(this.entity.posts.next_page_url)
+                .then((response) => {
+                    //console.log(response);
+                    //
+                    this.entity.posts = {
+                        ...response.data.posts,
+                        data: [
+                            ...this.entity.posts.data,
+                            ...response.data.posts.data,
+                        ],
+                    };
+                    //
+                });
+        },
+        addPost(post) {
+            //console.log(post);
+            this.entity.posts.data.unshift(post);
+        },
+        async destroyPost(id) {
+            this.$bvModal
+                .msgBoxConfirm("Are you sure?", {
+                    title: "Please Confirm",
+                    size: "sm",
+                    buttonSize: "sm",
+                    okVariant: "danger",
+                    okTitle: "YES",
+                    cancelTitle: "NO",
+                    footerClass: "p-2",
+                    hideHeaderClose: false,
+                    centered: true,
+                })
+                .then(async (value) => {
+                    if (value) {
+                        try {
+                            const req = await this.$store.dispatch(
+                                "deletePost",
+                                id
+                            );
+                            console.log(req);
+                            if (req.status == 200) {
+                                this.entity.posts.data =
+                                    this.entity.posts.data.filter(
+                                        (entity) => entity.id != id
+                                    );
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                })
+                .catch((err) => {
+                    // An error occurred
+                });
+        },
     },
 };
 </script>
-<style></style>
+<style>
+/* your passed-in element */
+.enlargeable-image > .slot {
+    display: inline-block;
+    /*max-width: 100%;*/
+    width: 100%;
+    max-height: 100%;
+    cursor: zoom-in;
+}
+/* default img if no element passed in */
+.enlargeable-image > .slot > img.default {
+    /*max-width: 100%;*/
+    width: 100%;
+    vertical-align: middle;
+}
+/* passed-in element when growth is happening */
+.enlargeable-image.active > .slot {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+/* full version that grows (background image allows seamless transition from thumbnail to full) */
+.enlargeable-image .full {
+    cursor: zoom-out;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: none;
+}
+.enlargeable-image .full > img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+/* full version while getting bigger */
+.enlargeable-image .full.enlarging {
+    display: flex;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: zoom-out;
+    z-index: 3;
+}
+/* full version while at its peak size */
+.enlargeable-image .full.enlarged {
+    display: flex;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: zoom-out;
+    z-index: 2;
+}
+/* full version while getting smaller */
+.enlargeable-image .full.delarging {
+    display: flex;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: zoom-in;
+    z-index: 1;
+}
+</style>

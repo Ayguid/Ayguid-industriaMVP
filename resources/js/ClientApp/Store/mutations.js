@@ -57,8 +57,8 @@ const mutations = {
   },
   BOOKMARK_ENTITY(state, payload) {
     //actualizamos el estado de la entidad en el mainData entities
-    const targetEntity = state.mainData.entities.data.find(f => f.id === payload.id)
-    state.mainData.entities.data.splice(state.mainData.entities.data.indexOf(targetEntity), 1, payload)
+    //const targetEntity = state.mainData.entities.data.find(f => f.id === payload.id)
+    //state.mainData.entities.data.splice(state.mainData.entities.data.indexOf(targetEntity), 1, payload)
     //si el usuario lo activo desde sus bookmarks, lo eliminamos de su lista.,,
     //esto hay que arreglaro con otro mutation o otro respons,,,porque la data esta pagineada, y puede cambiar la cantidad por pagina y romper
     const te = state.mainData.user_bookmarks.data.find(f => f.id === payload.id)
