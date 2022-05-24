@@ -90,7 +90,7 @@ class PublicApiController extends Controller
         //return $request->all();
         # code...
         $paginate = 9;
-        $user_id = $request->user('sanctum')->id;
+        $user_id = $request->user('sanctum')->id ?? null;
         //return response($request['catIds']);
         //$retu = [];
         /* MEJROAR ESTOS QUERIES, SE PUEDE HACER TODO EN UNO */
