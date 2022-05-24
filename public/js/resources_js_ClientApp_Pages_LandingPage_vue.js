@@ -4346,8 +4346,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     BookmarkIcon: _BookmarkIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      randomPicNum: ""
+    return {//randomPicNum: "",
     };
   },
   methods: {
@@ -4439,8 +4438,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {},
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {
-    this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1); //console.log(this.$route.name == "UserBookmarks");
+  mounted: function mounted() {//this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1);
+    //console.log(this.$route.name == "UserBookmarks");
   }
 });
 
@@ -4954,7 +4953,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.location_search input[data-v-058950a2]::-webkit-calendar-picker-indicator {\r\n    display: none !important;\n}\n.location_search[data-v-058950a2] ::-moz-placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] :-ms-input-placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] ::placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] :-ms-input-placeholder {\r\n    /* Internet Explorer 10-11 */\r\n    color: #bdbdbd !important;\n}\n.location_search[data-v-058950a2] ::-ms-input-placeholder {\r\n    /* Microsoft Edge */\r\n    color: #bdbdbd !important;\n}\ndiv.vs__actions[data-v-058950a2] {\r\n    cursor: pointer !important;\n}\n[data-v-058950a2]  {\r\n    --vs-colors--lightest: rgba(60, 60, 60, 0.26);\r\n    --vs-colors--light: rgba(60, 60, 60, 0.5);\r\n    --vs-colors--dark: #333;\r\n    --vs-colors--darkest: rgba(0, 0, 0, 0.15);\r\n\r\n    /* Search Input */\r\n    --vs-search-input-color: inherit;\r\n    --vs-search-input-placeholder-color: inherit;\r\n\r\n    /* Font */\r\n    --vs-font-size: 1rem;\r\n    --vs-line-height: 1.4;\r\n\r\n    /* Disabled State */\r\n    --vs-state-disabled-bg: rgb(248, 248, 248);\r\n    --vs-state-disabled-color: var(--vs-colors--light);\r\n    --vs-state-disabled-controls-color: var(--vs-colors--light);\r\n    --vs-state-disabled-cursor: not-allowed;\r\n\r\n    /* Borders */\r\n    --vs-border-color: var(--vs-colors--lightest);\r\n    --vs-border-width: 1px;\r\n    --vs-border-style: solid;\r\n    --vs-border-radius: 4px;\r\n\r\n    /* Actions: house the component controls */\r\n    --vs-actions-padding: 4px 6px 0 3px;\r\n\r\n    /* Component Controls: Clear, Open Indicator */\r\n    --vs-controls-color: var(--vs-colors--light);\r\n    --vs-controls-size: 1;\r\n    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;\r\n\r\n    /* Selected */\r\n    --vs-selected-bg: #f0f0f0;\r\n    --vs-selected-color: var(--vs-colors--dark);\r\n    --vs-selected-border-color: var(--vs-border-color);\r\n    --vs-selected-border-style: var(--vs-border-style);\r\n    --vs-selected-border-width: var(--vs-border-width);\r\n\r\n    /* Dropdown */\r\n    --vs-dropdown-bg: #fff;\r\n    --vs-dropdown-color: inherit;\r\n    --vs-dropdown-z-index: 1000;\r\n    --vs-dropdown-min-width: 160px;\r\n    --vs-dropdown-max-height: 350px;\r\n    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);\r\n\r\n    /* Options */\r\n    --vs-dropdown-option-bg: #000;\r\n    --vs-dropdown-option-color: var(--vs-dropdown-color);\r\n    --vs-dropdown-option-padding: 3px 20px;\r\n\r\n    /* Active State */\r\n    --vs-dropdown-option--active-bg: #5897fb;\r\n    --vs-dropdown-option--active-color: #fff;\r\n\r\n    /* Deselect State */\r\n    --vs-dropdown-option--deselect-bg: #fb5858;\r\n    --vs-dropdown-option--deselect-color: #fff;\r\n\r\n    /* Transitions */\r\n    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);\r\n    --vs-transition-duration: 150ms;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.location_search input[data-v-058950a2]::-webkit-calendar-picker-indicator {\n    display: none !important;\n}\n.location_search[data-v-058950a2] ::-moz-placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] :-ms-input-placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] ::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-058950a2] :-ms-input-placeholder {\n    /* Internet Explorer 10-11 */\n    color: #bdbdbd !important;\n}\n.location_search[data-v-058950a2] ::-ms-input-placeholder {\n    /* Microsoft Edge */\n    color: #bdbdbd !important;\n}\ndiv.vs__actions[data-v-058950a2] {\n    cursor: pointer !important;\n}\n[data-v-058950a2]  {\n    --vs-colors--lightest: rgba(60, 60, 60, 0.26);\n    --vs-colors--light: rgba(60, 60, 60, 0.5);\n    --vs-colors--dark: #333;\n    --vs-colors--darkest: rgba(0, 0, 0, 0.15);\n\n    /* Search Input */\n    --vs-search-input-color: inherit;\n    --vs-search-input-placeholder-color: inherit;\n\n    /* Font */\n    --vs-font-size: 1rem;\n    --vs-line-height: 1.4;\n\n    /* Disabled State */\n    --vs-state-disabled-bg: rgb(248, 248, 248);\n    --vs-state-disabled-color: var(--vs-colors--light);\n    --vs-state-disabled-controls-color: var(--vs-colors--light);\n    --vs-state-disabled-cursor: not-allowed;\n\n    /* Borders */\n    --vs-border-color: var(--vs-colors--lightest);\n    --vs-border-width: 1px;\n    --vs-border-style: solid;\n    --vs-border-radius: 4px;\n\n    /* Actions: house the component controls */\n    --vs-actions-padding: 4px 6px 0 3px;\n\n    /* Component Controls: Clear, Open Indicator */\n    --vs-controls-color: var(--vs-colors--light);\n    --vs-controls-size: 1;\n    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;\n\n    /* Selected */\n    --vs-selected-bg: #f0f0f0;\n    --vs-selected-color: var(--vs-colors--dark);\n    --vs-selected-border-color: var(--vs-border-color);\n    --vs-selected-border-style: var(--vs-border-style);\n    --vs-selected-border-width: var(--vs-border-width);\n\n    /* Dropdown */\n    --vs-dropdown-bg: #fff;\n    --vs-dropdown-color: inherit;\n    --vs-dropdown-z-index: 1000;\n    --vs-dropdown-min-width: 160px;\n    --vs-dropdown-max-height: 350px;\n    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);\n\n    /* Options */\n    --vs-dropdown-option-bg: #000;\n    --vs-dropdown-option-color: var(--vs-dropdown-color);\n    --vs-dropdown-option-padding: 3px 20px;\n\n    /* Active State */\n    --vs-dropdown-option--active-bg: #5897fb;\n    --vs-dropdown-option--active-color: #fff;\n\n    /* Deselect State */\n    --vs-dropdown-option--deselect-bg: #fb5858;\n    --vs-dropdown-option--deselect-color: #fff;\n\n    /* Transitions */\n    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);\n    --vs-transition-duration: 150ms;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6575,8 +6574,9 @@ var render = function () {
           staticClass: "mb-2",
           attrs: {
             title: _vm.entity.username,
-            "img-src":
-              "https://picsum.photos/600/300/?image=" + _vm.randomPicNum,
+            "img-src": _vm.entity.background_photo_path
+              ? _vm.entity.background_photo_path_full_url
+              : "http://127.0.0.1:8000/storage/media/defaultCover.webp",
             "img-alt": "Image",
             "img-top": "",
             tag: "article",
@@ -6613,7 +6613,7 @@ var render = function () {
               _vm._l(_vm.entity.categories, function (cat, i) {
                 return _c(
                   "span",
-                  { staticClass: "text-muted mr-2 mb-2", attrs: { ket: i } },
+                  { key: i, staticClass: "text-muted mr-2 mb-2" },
                   [
                     _vm._v(
                       "\n                " + _vm._s(cat.name) + "\n            "

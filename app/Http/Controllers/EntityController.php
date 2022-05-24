@@ -6,6 +6,7 @@ use App\Models\Entity;
 use App\Models\EntityCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class EntityController extends Controller
@@ -64,7 +65,7 @@ class EntityController extends Controller
             //guardamos por otro lado quien creo la entidad en, created_by 
             $newEntity = Entity::create(
                 [
-                    'user_id' => $request['userOwnsEntity'] ? $request->user()->id : false,
+                    'user_id' => $request['userOwnsEntity'] ? $request->user()->id : null,
                     'created_by_user_id' => $request->user()->id,
                     'name' => $validatedData['name'],
                     'email' => $request['email'],
@@ -187,5 +188,27 @@ class EntityController extends Controller
         //
         $entity->entCats()->delete();
         return $entity->delete();
+    }
+
+      // Profile Pic
+    public function storeProfilePic(Request $request)
+    {
+        $file = $request->file('file');
+        $entity = Entity::where('id',$request["entity_id"])->first();
+        //borrar foto anterior start -->
+        if ($entity->background_photo_path) Storage::disk('public')->delete($entity->background_photo_path);
+        //borrar foto anterior end-->
+        if ($file) {
+            $path = $request->file('file')->store('media/' . $request->user()->id . '/' . now()->format('Y') . '/' . now()->format('m'), 'public');
+        } else {
+            $path = 'avatar.jpg';
+        }
+        //
+        $entity->background_photo_path = $path;
+        $entity->update();
+        //
+        return response()->json([
+            'user' => $request->user()
+        ]);
     }
 }

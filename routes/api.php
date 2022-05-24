@@ -63,6 +63,7 @@ Route::get('/user/entities', [EntityController::class, 'index'])->middleware('au
 Route::post('/user/entities', [EntityController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/user/entities/{entity}', [EntityController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/user/entities/{entity}', [EntityController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/storeEntityProfilePic', [EntityController::class, 'storeProfilePic'])->middleware('auth:sanctum');
 //Route::post('/storeEntity', [EntityController::class, 'store'])->middleware('auth:sanctum');
 //Route::post('/updateEntity/{entity}', [EntityController::class, 'update'])->middleware('auth:sanctum');
 Route::post('/bookmarkEntity/{entity}', [UserBookmarkController::class, 'toggle'])->middleware('auth:sanctum');

@@ -42,6 +42,7 @@ class Entity extends Model
 
     //protected $appends = ['location'];
     protected $with = ['categories', 'user'];
+    protected $appends = ['background_photo_path_full_url'];
 
     public function categories()
     {
@@ -107,5 +108,11 @@ class Entity extends Model
     public function posts()
     {
         return $this->morphMany(Post::class, 'model');
+    }
+
+
+    public function getbackgroundPhotoPathFullUrlAttribute()
+    {
+        return url('storage/' . $this->background_photo_path);
     }
 }

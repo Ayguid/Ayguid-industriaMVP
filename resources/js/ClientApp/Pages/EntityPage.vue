@@ -4,9 +4,26 @@
             <div>
                 <h1>Entity</h1>
             </div>
-            <div class="row">
-                <!-- -->
+            <div class="picture-container">
+                <div class="picture">
+                    <img
+                        v-if="entity"
+                        :src="entity.background_photo_path ? entity.background_photo_path_full_url : 'http://127.0.0.1:8000/storage/media/defaultCover.webp'"
+                        class="picture-src"
+                        ref="profile_pic"
+                        title=""
+                    />
 
+                    <input v-if="entity.user_id == $store.state.user.id"
+                        @change="previewFile"
+                        type="file"
+                        ref="profile_pic_input"
+                        class=""
+                    />
+                </div>
+            </div>
+            <!-- -->
+            <div class="row">
                 <div class="col-5">
                     <div>
                         <b-list-group>
@@ -126,9 +143,10 @@
                                     />
                                     <hr />
                                     <infinite-scroll :loadMore="loadMorePosts">
+                                        <div v-if="entity">
                                         <b-card
                                             class="mb-2"
-                                            v-if="entity"
+                                            
                                             v-for="(post, i) in entity.posts
                                                 .data"
                                             :key="i"
@@ -178,6 +196,7 @@
                                                 >
                                             </div>
                                         </b-card>
+                                        </div>
                                     </infinite-scroll>
                                 </div>
                             </b-tab>
@@ -246,6 +265,7 @@ export default {
                     solid: true,
                 });
             } finally {
+                console.log("Finally")
             }
         },
         loadMorePosts() {
@@ -293,7 +313,7 @@ export default {
                                 "deletePost",
                                 id
                             );
-                            console.log(req);
+                            //console.log(req);
                             if (req.status == 200) {
                                 this.entity.posts.data =
                                     this.entity.posts.data.filter(
@@ -308,6 +328,51 @@ export default {
                 .catch((err) => {
                     // An error occurred
                 });
+        },
+        previewFile() {
+            const preview = this.$refs.profile_pic;
+            const file = this.$refs.profile_pic_input.files[0];
+            const reader = new FileReader();
+            reader.addEventListener(
+                "load",
+                function () {
+                    // convert image file to base64 string
+                    preview.src = reader.result;
+                },
+                false
+            );
+
+            if (file) {
+                reader.readAsDataURL(file);
+                this.storeProfilePic(file);
+            }
+        },
+        async storeProfilePic(file) {
+            try {
+                let formData = new FormData();
+                formData.append("file", file);
+                formData.append("entity_id", this.entity.id);
+                //console.log(this.entity.id)
+                
+                const response = await this.$store.dispatch(
+                    "storeEntityProfilePic",
+                    formData
+                );
+                
+                this.$bvToast.toast("Pic changed successfully!", {
+                    title: `Great:`,
+                    variant: "success",
+                    solid: true,
+                });
+            } catch (ex) {
+                this.$bvToast.toast(ex.response.data.message, {
+                    title: `Errors:`,
+                    variant: "danger",
+                    solid: true,
+                });
+                this.errors = ex.response.data.errors;
+            } finally {
+            }
         },
     },
 };
@@ -384,4 +449,53 @@ export default {
     cursor: zoom-in;
     z-index: 1;
 }
+
+/*Profile Pic Start*/
+.picture-container {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+.picture {
+    /*width: 106px;*/
+    /*height: 106px;*/
+    background-color: #999999;
+    border: 4px solid #cccccc;
+    color: #ffffff;
+    /*border-radius: 50%;*/
+    margin: 0px auto;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.picture:hover {
+    border-color: #2ca8ff;
+}
+.content.ct-wizard-green .picture:hover {
+    border-color: #05ae0e;
+}
+.content.ct-wizard-blue .picture:hover {
+    border-color: #3472f7;
+}
+.content.ct-wizard-orange .picture:hover {
+    border-color: #ff9500;
+}
+.content.ct-wizard-red .picture:hover {
+    border-color: #ff3b30;
+}
+.picture input[type="file"] {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.picture-src {
+    width: 100%;
+}
+/*Profile Pic End*/
 </style>

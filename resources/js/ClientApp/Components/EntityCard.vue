@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div>                       
         <b-card
             :title="entity.username"
-            :img-src="'https://picsum.photos/600/300/?image=' + randomPicNum"
+            :img-src="entity.background_photo_path ? entity.background_photo_path_full_url : 'http://127.0.0.1:8000/storage/media/defaultCover.webp'"
             img-alt="Image"
             img-top
             tag="article"
@@ -21,7 +21,7 @@
                 <span
                     class="text-muted mr-2 mb-2"
                     v-for="(cat, i) in entity.categories"
-                    :ket="i"
+                    :key="i"
                 >
                     {{ cat.name }}
                 </span>
@@ -65,7 +65,7 @@ export default {
     },
     data() {
         return {
-            randomPicNum: "",
+            //randomPicNum: "",
         };
     },
     methods: {
@@ -118,7 +118,7 @@ export default {
     computed: {},
     beforeMount() {},
     mounted() {
-        this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1);
+        //this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1);
         //console.log(this.$route.name == "UserBookmarks");
     },
 };

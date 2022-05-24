@@ -39,6 +39,14 @@ const actions = {
     //console.log(respMe);
     return respMe
   },
+  //
+  async storeEntityProfilePic({ commit }, payload) {
+    const respMe = await axios.post('/api/storeEntityProfilePic', payload)
+    //commit('SET_USER', respMe.data.user)
+    //console.log(respMe);
+    return respMe
+  },
+  //
   async updatePassword({ commit }, payload) {
     const resp = await axios.post('/api/changePassword', payload)
     commit('RESET_PASSWORD', resp.data)

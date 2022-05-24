@@ -701,7 +701,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     /*
     let result = null;
-      for (let obj of this.mainData.parent_categories) {
+     for (let obj of this.mainData.parent_categories) {
         result = dfs(obj, 9);
         if (result) {
             break;
@@ -1553,8 +1553,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     BookmarkIcon: _BookmarkIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      randomPicNum: ""
+    return {//randomPicNum: "",
     };
   },
   methods: {
@@ -1646,8 +1645,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {},
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {
-    this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1); //console.log(this.$route.name == "UserBookmarks");
+  mounted: function mounted() {//this.randomPicNum = Math.floor(Math.random() * (30 - 1 + 1) + 1);
+    //console.log(this.$route.name == "UserBookmarks");
   }
 });
 
@@ -3349,6 +3348,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3419,14 +3437,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 11:
                 _context.prev = 11;
+                console.log("Finally");
                 return _context.finish(11);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8, 11, 13]]);
+        }, _callee, null, [[0, 8, 11, 14]]);
       }))();
     },
     loadMorePosts: function loadMorePosts() {
@@ -3477,7 +3496,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!value) {
-                              _context2.next = 12;
+                              _context2.next = 11;
                               break;
                             }
 
@@ -3487,28 +3506,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                           case 4:
                             req = _context2.sent;
-                            console.log(req);
 
+                            //console.log(req);
                             if (req.status == 200) {
                               _this3.entity.posts.data = _this3.entity.posts.data.filter(function (entity) {
                                 return entity.id != id;
                               });
                             }
 
-                            _context2.next = 12;
+                            _context2.next = 11;
                             break;
 
-                          case 9:
-                            _context2.prev = 9;
+                          case 8:
+                            _context2.prev = 8;
                             _context2.t0 = _context2["catch"](1);
                             console.log(_context2.t0);
 
-                          case 12:
+                          case 11:
                           case "end":
                             return _context2.stop();
                         }
                       }
-                    }, _callee2, null, [[1, 9]]);
+                    }, _callee2, null, [[1, 8]]);
                   }));
 
                   return function (_x) {
@@ -3523,6 +3542,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    previewFile: function previewFile() {
+      var preview = this.$refs.profile_pic;
+      var file = this.$refs.profile_pic_input.files[0];
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        // convert image file to base64 string
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+        reader.readAsDataURL(file);
+        this.storeProfilePic(file);
+      }
+    },
+    storeProfilePic: function storeProfilePic(file) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                formData = new FormData();
+                formData.append("file", file);
+                formData.append("entity_id", _this4.entity.id); //console.log(this.entity.id)
+
+                _context4.next = 6;
+                return _this4.$store.dispatch("storeEntityProfilePic", formData);
+
+              case 6:
+                response = _context4.sent;
+
+                _this4.$bvToast.toast("Pic changed successfully!", {
+                  title: "Great:",
+                  variant: "success",
+                  solid: true
+                });
+
+                _context4.next = 14;
+                break;
+
+              case 10:
+                _context4.prev = 10;
+                _context4.t0 = _context4["catch"](0);
+
+                _this4.$bvToast.toast(_context4.t0.response.data.message, {
+                  title: "Errors:",
+                  variant: "danger",
+                  solid: true
+                });
+
+                _this4.errors = _context4.t0.response.data.errors;
+
+              case 14:
+                _context4.prev = 14;
+                return _context4.finish(14);
+
+              case 16:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 10, 14, 16]]);
       }))();
     }
   }
@@ -4818,7 +4904,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-6e8eaa68]:focus {\r\n    outline: 0 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-6e8eaa68]:focus {\n    outline: 0 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4841,7 +4927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.location_search input[data-v-000dc18e]::-webkit-calendar-picker-indicator {\r\n    display: none !important;\n}\n.location_search[data-v-000dc18e] ::-moz-placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] :-ms-input-placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] ::placeholder {\r\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\r\n    color: #bdbdbd !important;\r\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] :-ms-input-placeholder {\r\n    /* Internet Explorer 10-11 */\r\n    color: #bdbdbd !important;\n}\n.location_search[data-v-000dc18e] ::-ms-input-placeholder {\r\n    /* Microsoft Edge */\r\n    color: #bdbdbd !important;\n}\ndiv.vs__actions[data-v-000dc18e] {\r\n    cursor: pointer !important;\n}\n[data-v-000dc18e]  {\r\n    --vs-colors--lightest: rgba(60, 60, 60, 0.26);\r\n    --vs-colors--light: rgba(60, 60, 60, 0.5);\r\n    --vs-colors--dark: #333;\r\n    --vs-colors--darkest: rgba(0, 0, 0, 0.15);\r\n\r\n    /* Search Input */\r\n    --vs-search-input-color: inherit;\r\n    --vs-search-input-placeholder-color: inherit;\r\n\r\n    /* Font */\r\n    --vs-font-size: 1rem;\r\n    --vs-line-height: 1.4;\r\n\r\n    /* Disabled State */\r\n    --vs-state-disabled-bg: rgb(248, 248, 248);\r\n    --vs-state-disabled-color: var(--vs-colors--light);\r\n    --vs-state-disabled-controls-color: var(--vs-colors--light);\r\n    --vs-state-disabled-cursor: not-allowed;\r\n\r\n    /* Borders */\r\n    --vs-border-color: var(--vs-colors--lightest);\r\n    --vs-border-width: 1px;\r\n    --vs-border-style: solid;\r\n    --vs-border-radius: 4px;\r\n\r\n    /* Actions: house the component controls */\r\n    --vs-actions-padding: 4px 6px 0 3px;\r\n\r\n    /* Component Controls: Clear, Open Indicator */\r\n    --vs-controls-color: var(--vs-colors--light);\r\n    --vs-controls-size: 1;\r\n    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;\r\n\r\n    /* Selected */\r\n    --vs-selected-bg: #f0f0f0;\r\n    --vs-selected-color: var(--vs-colors--dark);\r\n    --vs-selected-border-color: var(--vs-border-color);\r\n    --vs-selected-border-style: var(--vs-border-style);\r\n    --vs-selected-border-width: var(--vs-border-width);\r\n\r\n    /* Dropdown */\r\n    --vs-dropdown-bg: #fff;\r\n    --vs-dropdown-color: inherit;\r\n    --vs-dropdown-z-index: 1000;\r\n    --vs-dropdown-min-width: 160px;\r\n    --vs-dropdown-max-height: 350px;\r\n    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);\r\n\r\n    /* Options */\r\n    --vs-dropdown-option-bg: #000;\r\n    --vs-dropdown-option-color: var(--vs-dropdown-color);\r\n    --vs-dropdown-option-padding: 3px 20px;\r\n\r\n    /* Active State */\r\n    --vs-dropdown-option--active-bg: #5897fb;\r\n    --vs-dropdown-option--active-color: #fff;\r\n\r\n    /* Deselect State */\r\n    --vs-dropdown-option--deselect-bg: #fb5858;\r\n    --vs-dropdown-option--deselect-color: #fff;\r\n\r\n    /* Transitions */\r\n    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);\r\n    --vs-transition-duration: 150ms;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.location_search input[data-v-000dc18e]::-webkit-calendar-picker-indicator {\n    display: none !important;\n}\n.location_search[data-v-000dc18e] ::-moz-placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] :-ms-input-placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] ::placeholder {\n    /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #bdbdbd !important;\n    opacity: 1 !important; /* Firefox */\n}\n.location_search[data-v-000dc18e] :-ms-input-placeholder {\n    /* Internet Explorer 10-11 */\n    color: #bdbdbd !important;\n}\n.location_search[data-v-000dc18e] ::-ms-input-placeholder {\n    /* Microsoft Edge */\n    color: #bdbdbd !important;\n}\ndiv.vs__actions[data-v-000dc18e] {\n    cursor: pointer !important;\n}\n[data-v-000dc18e]  {\n    --vs-colors--lightest: rgba(60, 60, 60, 0.26);\n    --vs-colors--light: rgba(60, 60, 60, 0.5);\n    --vs-colors--dark: #333;\n    --vs-colors--darkest: rgba(0, 0, 0, 0.15);\n\n    /* Search Input */\n    --vs-search-input-color: inherit;\n    --vs-search-input-placeholder-color: inherit;\n\n    /* Font */\n    --vs-font-size: 1rem;\n    --vs-line-height: 1.4;\n\n    /* Disabled State */\n    --vs-state-disabled-bg: rgb(248, 248, 248);\n    --vs-state-disabled-color: var(--vs-colors--light);\n    --vs-state-disabled-controls-color: var(--vs-colors--light);\n    --vs-state-disabled-cursor: not-allowed;\n\n    /* Borders */\n    --vs-border-color: var(--vs-colors--lightest);\n    --vs-border-width: 1px;\n    --vs-border-style: solid;\n    --vs-border-radius: 4px;\n\n    /* Actions: house the component controls */\n    --vs-actions-padding: 4px 6px 0 3px;\n\n    /* Component Controls: Clear, Open Indicator */\n    --vs-controls-color: var(--vs-colors--light);\n    --vs-controls-size: 1;\n    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;\n\n    /* Selected */\n    --vs-selected-bg: #f0f0f0;\n    --vs-selected-color: var(--vs-colors--dark);\n    --vs-selected-border-color: var(--vs-border-color);\n    --vs-selected-border-style: var(--vs-border-style);\n    --vs-selected-border-width: var(--vs-border-width);\n\n    /* Dropdown */\n    --vs-dropdown-bg: #fff;\n    --vs-dropdown-color: inherit;\n    --vs-dropdown-z-index: 1000;\n    --vs-dropdown-min-width: 160px;\n    --vs-dropdown-max-height: 350px;\n    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);\n\n    /* Options */\n    --vs-dropdown-option-bg: #000;\n    --vs-dropdown-option-color: var(--vs-dropdown-color);\n    --vs-dropdown-option-padding: 3px 20px;\n\n    /* Active State */\n    --vs-dropdown-option--active-bg: #5897fb;\n    --vs-dropdown-option--active-color: #fff;\n\n    /* Deselect State */\n    --vs-dropdown-option--deselect-bg: #fb5858;\n    --vs-dropdown-option--deselect-color: #fff;\n\n    /* Transitions */\n    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);\n    --vs-transition-duration: 150ms;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4864,7 +4950,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbutton[data-v-16799772]:disabled {\r\n    opacity: 75%;\r\n    cursor: not-allowed;\n}\ntextarea[data-v-16799772] {\r\n    border: none;\r\n    background-color: transparent;\r\n    resize: none;\r\n    outline: none;\r\n    width: 100% !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbutton[data-v-16799772]:disabled {\n    opacity: 75%;\n    cursor: not-allowed;\n}\ntextarea[data-v-16799772] {\n    border: none;\n    background-color: transparent;\n    resize: none;\n    outline: none;\n    width: 100% !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4887,7 +4973,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* your passed-in element */\n.enlargeable-image > .slot {\n    display: inline-block;\n    /*max-width: 100%;*/\n    width: 100%;\n    max-height: 100%;\n    cursor: zoom-in;\n}\n/* default img if no element passed in */\n.enlargeable-image > .slot > img.default {\n    /*max-width: 100%;*/\n    width: 100%;\n    vertical-align: middle;\n}\n/* passed-in element when growth is happening */\n.enlargeable-image.active > .slot {\n    opacity: 0.3;\n    filter: grayscale(100%);\n}\n/* full version that grows (background image allows seamless transition from thumbnail to full) */\n.enlargeable-image .full {\n    cursor: zoom-out;\n    background-color: transparent;\n    align-items: center;\n    justify-content: center;\n    background-position: center center;\n    background-repeat: no-repeat;\n    background-size: contain;\n    display: none;\n}\n.enlargeable-image .full > img {\n    -o-object-fit: contain;\n       object-fit: contain;\n    width: 100%;\n    height: 100%;\n}\n/* full version while getting bigger */\n.enlargeable-image .full.enlarging {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-out;\n    z-index: 3;\n}\n/* full version while at its peak size */\n.enlargeable-image .full.enlarged {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-out;\n    z-index: 2;\n}\n/* full version while getting smaller */\n.enlargeable-image .full.delarging {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-in;\n    z-index: 1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* your passed-in element */\n.enlargeable-image > .slot {\n    display: inline-block;\n    /*max-width: 100%;*/\n    width: 100%;\n    max-height: 100%;\n    cursor: zoom-in;\n}\n/* default img if no element passed in */\n.enlargeable-image > .slot > img.default {\n    /*max-width: 100%;*/\n    width: 100%;\n    vertical-align: middle;\n}\n/* passed-in element when growth is happening */\n.enlargeable-image.active > .slot {\n    opacity: 0.3;\n    filter: grayscale(100%);\n}\n/* full version that grows (background image allows seamless transition from thumbnail to full) */\n.enlargeable-image .full {\n    cursor: zoom-out;\n    background-color: transparent;\n    align-items: center;\n    justify-content: center;\n    background-position: center center;\n    background-repeat: no-repeat;\n    background-size: contain;\n    display: none;\n}\n.enlargeable-image .full > img {\n    -o-object-fit: contain;\n       object-fit: contain;\n    width: 100%;\n    height: 100%;\n}\n/* full version while getting bigger */\n.enlargeable-image .full.enlarging {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-out;\n    z-index: 3;\n}\n/* full version while at its peak size */\n.enlargeable-image .full.enlarged {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-out;\n    z-index: 2;\n}\n/* full version while getting smaller */\n.enlargeable-image .full.delarging {\n    display: flex;\n    position: fixed;\n    left: 0px;\n    top: 0px;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    cursor: zoom-in;\n    z-index: 1;\n}\n\n/*Profile Pic Start*/\n.picture-container {\n    position: relative;\n    cursor: pointer;\n    text-align: center;\n}\n.picture {\n    /*width: 106px;*/\n    /*height: 106px;*/\n    background-color: #999999;\n    border: 4px solid #cccccc;\n    color: #ffffff;\n    /*border-radius: 50%;*/\n    margin: 0px auto;\n    overflow: hidden;\n    transition: all 0.2s;\n    -webkit-transition: all 0.2s;\n}\n.picture:hover {\n    border-color: #2ca8ff;\n}\n.content.ct-wizard-green .picture:hover {\n    border-color: #05ae0e;\n}\n.content.ct-wizard-blue .picture:hover {\n    border-color: #3472f7;\n}\n.content.ct-wizard-orange .picture:hover {\n    border-color: #ff9500;\n}\n.content.ct-wizard-red .picture:hover {\n    border-color: #ff3b30;\n}\n.picture input[type=\"file\"] {\n    cursor: pointer;\n    display: block;\n    height: 100%;\n    left: 0;\n    opacity: 0 !important;\n    position: absolute;\n    top: 0;\n    width: 100%;\n}\n.picture-src {\n    width: 100%;\n}\n/*Profile Pic End*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8209,8 +8295,9 @@ var render = function () {
           staticClass: "mb-2",
           attrs: {
             title: _vm.entity.username,
-            "img-src":
-              "https://picsum.photos/600/300/?image=" + _vm.randomPicNum,
+            "img-src": _vm.entity.background_photo_path
+              ? _vm.entity.background_photo_path_full_url
+              : "http://127.0.0.1:8000/storage/media/defaultCover.webp",
             "img-alt": "Image",
             "img-top": "",
             tag: "article",
@@ -8247,7 +8334,7 @@ var render = function () {
               _vm._l(_vm.entity.categories, function (cat, i) {
                 return _c(
                   "span",
-                  { staticClass: "text-muted mr-2 mb-2", attrs: { ket: i } },
+                  { key: i, staticClass: "text-muted mr-2 mb-2" },
                   [
                     _vm._v(
                       "\n                " + _vm._s(cat.name) + "\n            "
@@ -9819,6 +9906,31 @@ var render = function () {
     _c("div", { staticClass: "entity" }, [
       _c("div", [_c("h1", [_vm._v("Entity")])]),
       _vm._v(" "),
+      _c("div", { staticClass: "picture-container" }, [
+        _c("div", { staticClass: "picture" }, [
+          _vm.entity
+            ? _c("img", {
+                ref: "profile_pic",
+                staticClass: "picture-src",
+                attrs: {
+                  src: _vm.entity.background_photo_path
+                    ? _vm.entity.background_photo_path_full_url
+                    : "http://127.0.0.1:8000/storage/media/defaultCover.webp",
+                  title: "",
+                },
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.entity.user_id == _vm.$store.state.user.id
+            ? _c("input", {
+                ref: "profile_pic_input",
+                attrs: { type: "file" },
+                on: { change: _vm.previewFile },
+              })
+            : _vm._e(),
+        ]),
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-5" }, [
           _c(
@@ -10044,83 +10156,93 @@ var render = function () {
                         _c(
                           "infinite-scroll",
                           { attrs: { loadMore: _vm.loadMorePosts } },
-                          _vm._l(_vm.entity.posts.data, function (post, i) {
-                            return _vm.entity
+                          [
+                            _vm.entity
                               ? _c(
-                                  "b-card",
-                                  {
-                                    key: i,
-                                    staticClass: "mb-2",
-                                    attrs: {
-                                      title: "Date",
-                                      "sub-title": post.created_at,
-                                    },
-                                  },
-                                  [
-                                    _vm._l(post.media, function (img, i) {
-                                      return _c("enlargeable-image", {
-                                        key: i,
-                                        attrs: {
-                                          src: img.full_url,
-                                          alt: "",
-                                          width: "100%",
-                                          src_large: img.full_url,
+                                  "div",
+                                  _vm._l(
+                                    _vm.entity.posts.data,
+                                    function (post, i) {
+                                      return _c(
+                                        "b-card",
+                                        {
+                                          key: i,
+                                          staticClass: "mb-2",
+                                          attrs: {
+                                            title: "Date",
+                                            "sub-title": post.created_at,
+                                          },
                                         },
-                                      })
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-card-text",
-                                      {
-                                        staticStyle: {
-                                          "white-space": "pre-line",
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(post.content) +
-                                            "\n                                        "
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("b-card-text", [
-                                      _vm._v(
-                                        "A second paragraph of text in\n                                            the card."
-                                      ),
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.$store.state.user.id ==
-                                    _vm.entity.user_id
-                                      ? _c(
-                                          "div",
-                                          [
-                                            _c(
-                                              "b-link",
-                                              {
-                                                staticClass: "card-link",
-                                                attrs: { href: "#" },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.destroyPost(
-                                                      post.id
-                                                    )
-                                                  },
-                                                },
+                                        [
+                                          _vm._l(post.media, function (img, i) {
+                                            return _c("enlargeable-image", {
+                                              key: i,
+                                              attrs: {
+                                                src: img.full_url,
+                                                alt: "",
+                                                width: "100%",
+                                                src_large: img.full_url,
                                               },
-                                              [_vm._v("Delete")]
+                                            })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-card-text",
+                                            {
+                                              staticStyle: {
+                                                "white-space": "pre-line",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(post.content) +
+                                                  "\n                                        "
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-card-text", [
+                                            _vm._v(
+                                              "A second paragraph of text in\n                                            the card."
                                             ),
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
-                                  ],
-                                  2
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.$store.state.user.id ==
+                                          _vm.entity.user_id
+                                            ? _c(
+                                                "div",
+                                                [
+                                                  _c(
+                                                    "b-link",
+                                                    {
+                                                      staticClass: "card-link",
+                                                      attrs: { href: "#" },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.destroyPost(
+                                                            post.id
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [_vm._v("Delete")]
+                                                  ),
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
+                                        ],
+                                        2
+                                      )
+                                    }
+                                  ),
+                                  1
                                 )
-                              : _vm._e()
-                          }),
-                          1
+                              : _vm._e(),
+                          ]
                         ),
                       ],
                       1

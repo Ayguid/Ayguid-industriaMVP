@@ -77,6 +77,7 @@ class PostController extends Controller
                 $media = $request->file('media');
                 foreach ($media as $key => $image) {
                     $image->store('media/' . $request->user()->id . '/' . now()->format('Y') . '/' . now()->format('m'), 'public');
+                    //--//--//
                     $media = Media::create([
                         'model_id' => $post->id,
                         'model_type' => Post::class,

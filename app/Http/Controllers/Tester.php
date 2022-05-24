@@ -98,7 +98,8 @@ class Tester extends Controller
 
     //
     public function data(Request $request)
-    {
+    {   
+        return Auth::user();
         /* crea el admin role
         $role = Role::create(['name' => 'super-admin']);
         $user = User::where('id', 1)->first();

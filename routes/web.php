@@ -20,7 +20,9 @@ Route::get('/test',  [Tester::class, 'data']);
 Route::prefix('superadmin')->group(function () {
     Route::get('/{any?}', function () {
         return view('superadmin');
-    })->middleware('super-admin')->name('superadminPanel')->where(['any' => '.*']);
+    })->name('superadminPanel')->where(['any' => '.*']);//->middleware('super-admin') 
+    //vamos a tener que poner el middleware en los api res, porque no usamos mas los cookies para mandar el csrf
+    //asi que habria que hacer un app aparte para el admin
 });
 
 

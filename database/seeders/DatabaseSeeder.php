@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //5 CATEGORIAS PADRE con 3 hijos directos y 2 nietos
-
+        
         $categories = \App\Models\Category::factory(5)->create()->each(function ($cat) {
             $cats = \App\Models\Category::factory(3)->create()->each(function ($grandson) {
                 $grandsons = \App\Models\Category::factory(2)->create();
