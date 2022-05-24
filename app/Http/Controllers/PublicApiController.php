@@ -101,7 +101,7 @@ class PublicApiController extends Controller
             //array_push($retu, 1);
             $catsArrayIds = $request['selectedCategories'];
             $entities = Entity::whereHas('categories',  function ($query) use ($catsArrayIds) {
-                return $query->whereIn('category_id', $catsArrayIds)->orWhere('parent_id', $catsArrayIds);
+                return $query->whereIn('category_id', $catsArrayIds)->orWhereIn('parent_id', $catsArrayIds);
             })
                 ->with(['user', 'categories'])->withCount([
                     'bookmarks',
@@ -114,7 +114,7 @@ class PublicApiController extends Controller
         if (!empty($request['locations']) && empty($request['selectedCategories'])) {
             //array_push($retu, 2);
             $locationsArray = $request['locations'];
-            $entities = Entity::where('country_id', $locationsArray)->orWhere('state_id', $locationsArray)->orWhere('city_id', $locationsArray)
+            $entities = Entity::whereIn('country_id', $locationsArray)->orWhereIn('state_id', $locationsArray)->orWhereIn('city_id', $locationsArray)
                 ->with(['user', 'categories'])->withCount([
                     'bookmarks',
                     'bookmarks as bookmarked' => function ($q) use ($user_id) {
@@ -127,10 +127,10 @@ class PublicApiController extends Controller
             //array_push($retu, 3);
             $locationsArray = $request['locations'];
             $catsArrayIds = $request['selectedCategories'];
-            $entities = Entity::where('country_id', $locationsArray)->orWhere('state_id', $locationsArray)->orWhere('city_id', $locationsArray)
+            $entities = Entity::whereIn('country_id', $locationsArray)->orWhereIn('state_id', $locationsArray)->orWhereIn('city_id', $locationsArray)
 
                 ->whereHas('categories',  function ($query) use ($catsArrayIds) {
-                    return $query->whereIn('category_id', $catsArrayIds)->orWhere('parent_id', $catsArrayIds);
+                    return $query->whereIn('category_id', $catsArrayIds)->orWhereIn('parent_id', $catsArrayIds);
                 })->with(['user', 'categories'])->withCount([
                     'bookmarks',
                     'bookmarks as bookmarked' => function ($q) use ($user_id) {

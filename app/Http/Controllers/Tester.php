@@ -99,17 +99,17 @@ class Tester extends Controller
     //
     public function data(Request $request)
     {
+        /* crea el admin role
+        $role = Role::create(['name' => 'super-admin']);
+        $user = User::where('id', 1)->first();
+        $user->assignRole($role);
+        return;
+        */
         //$json = Storage::disk('local')->get('jsons/localidades.json');
         //return $collection = (new Collection(json_decode($json, true)['localidades']))->where("id", "06021010000")->paginate(10);
         //return Entity::where('id', 41)->first()->posts;
         $reso = Entity::where('id', 1)->first();
         return response($reso);
-        /* crea el admin role
-        $role = Role::create(['name' => 'superadmin']);
-        $user = User::where('id', 1)->first();
-        $user->assignRole($role);
-        return;
-        */
         // para buscar la localidad en el json de localidades por nombre de localidad, y pagineamos
         $queryParam = "Villa";
         $json = Storage::disk('local')->get('jsons/localidades.json');

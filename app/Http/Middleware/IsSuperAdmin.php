@@ -17,9 +17,14 @@ class IsSuperAdmin
      */
     public function handle($request, Closure $next)
     {
+
         if (Auth::user() &&  Auth::user()->hasRole('super-admin')) {
             return $next($request);
         }
+        /*
+        if ($request->user() &&  $request->user()->hasRole('super-admin')) {
+            return $next($request);
+        }*/
         //else
         return response('Unauthorized.', 401);
     }
