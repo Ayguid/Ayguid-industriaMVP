@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     protected $userISadmin;
+    
     public function __construct()
     {
-        $this->middleware('super-admin');
+        //$this->middleware('super-admin');
     }
     /**
      * Display a listing of the resource.

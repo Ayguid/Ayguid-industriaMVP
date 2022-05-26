@@ -7279,7 +7279,7 @@ var render = function () {
     [
       _c("h2", [_vm._v("Categories")]),
       _vm._v(" "),
-      _vm.mainData.parent_categories
+      _vm.mainData.categories
         ? _c(
             "v-card",
             { staticClass: "mx-auto" },
@@ -7333,7 +7333,7 @@ var render = function () {
                       "selection-type": "independent",
                       selectable: "",
                       "return-object": "",
-                      items: _vm.mainData.parent_categories,
+                      items: _vm.mainData.categories,
                       search: _vm.search,
                       filter: _vm.filter,
                       open: _vm.open,

@@ -12,6 +12,7 @@ const actions = {
     // commit('SET_USER', respMe.data) //pseudo login
   },
   async login({ commit }, payload) {
+    
     const res = await axios.post('/api/login', payload)
     //console.log(res)
     commit('SET_USER', res.data.user)

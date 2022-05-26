@@ -87,5 +87,5 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware('
 //Route::post('/storeProcess', [AdminController::class, 'storeProcess'])->middleware('auth:sanctum');
 //Route::post('/updateProcess', [AdminController::class, 'updateProcess'])->middleware('auth:sanctum');
 //categories
-//Route::post('/storeCategory', [AdminController::class, 'storeCategory'])->middleware('auth:sanctum');
-//Route::post('/updateCategory', [AdminController::class, 'updateCategory'])->middleware('auth:sanctum');
+Route::post('/storeCategory', [AdminController::class, 'storeCategory'])->middleware('auth:sanctum');
+Route::post('/updateCategory', [AdminController::class, 'updateCategory'])->middleware('auth:sanctum');

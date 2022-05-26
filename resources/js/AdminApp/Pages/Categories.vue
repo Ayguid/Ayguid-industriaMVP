@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <h2>Categories</h2>
-        <v-card v-if="mainData.parent_categories" class="mx-auto">
+        <v-card v-if="mainData.categories" class="mx-auto">
             <v-sheet class="pa-4 primary lighten-2">
                 <v-text-field
                     v-model="search"
@@ -27,7 +27,7 @@
                     return-object
                     @input="removeLastSelect"
                     v-model="selections"
-                    :items="mainData.parent_categories"
+                    :items="mainData.categories"
                     :search="search"
                     :filter="filter"
                     :open.sync="open"

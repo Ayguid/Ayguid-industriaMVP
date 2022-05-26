@@ -2420,8 +2420,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // importing the helper
 
 (0,_interceptor__WEBPACK_IMPORTED_MODULE_1__["default"])(); //
-
-var entryPoint = ""; //process.env.MIX_APP_URL "http://127.0.0.1:8000"
+//const entryPoint = ""//process.env.MIX_APP_URL "http://127.0.0.1:8000"
 //console.log(entryPoint)
 //
 
@@ -2435,7 +2434,7 @@ var actions = {
             case 0:
               commit = _ref.commit;
               _context.next = 3;
-              return axios.get(entryPoint + '/api/mainData');
+              return axios.get('/api/categories');
 
             case 3:
               res = _context.sent;
@@ -2458,7 +2457,7 @@ var actions = {
             case 0:
               commit = _ref2.commit;
               _context2.next = 3;
-              return axios.post(entryPoint + '/api/storeCategory', payload);
+              return axios.post('/api/storeCategory', payload);
 
             case 3:
               res = _context2.sent;
@@ -2481,7 +2480,7 @@ var actions = {
             case 0:
               commit = _ref3.commit;
               _context3.next = 3;
-              return axios.post(entryPoint + '/api/updateCategory', payload);
+              return axios.post('/api/updateCategory', payload);
 
             case 3:
               res = _context3.sent;
@@ -2598,19 +2597,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
- //import store from './index'
-//import router from '../Router/index'
-//si el interceptor recibe errores de tipo 401 o 419, tira el user en local storage y vuex, y dsps nos redirije/vuerouter al login
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ "./resources/js/AdminApp/Store/index.js");
+/* harmony import */ var _Router_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Router/index */ "./resources/js/AdminApp/Router/index.js");
+
+
+
+
+function onUploadProgress(ev) {//let percentCompleted = Math.floor((ev.loaded * 100) / ev.total);
+  //console.log(percentCompleted);
+  // do your thing here
+}
+
+function handleUploadProgress(ev) {//console.log(ev);
+  // do your thing here
+} //si el interceptor recibe errores de tipo 401 o 419, tira el user en local storage y vuex, y dsps nos redirije/vuerouter al login
+
 
 function setup() {
+  // Add a request interceptor
+  axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.request.use(function (config) {
+    // Do something before request is sent
+    //config.onUploadProgress = onUploadProgress;
+    //config.handleUploadProgress = handleUploadProgress
+    var token = localStorage.getItem('access_token');
+
+    if (token) {
+      config.headers['Authorization'] = "Bearer ".concat(token);
+    }
+
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
   axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.response.use(function (response) {
     // Do something with response data
     return response;
   }, function (error) {
     // Do something with response error
     if (error.response.status === 401 || error.response.status === 419) {
-      console.log("Unauthorized Request"); //store.commit('LOG_OUT')
-      //router.push('login')
+      console.log("Unauthorized Request");
+      _index__WEBPACK_IMPORTED_MODULE_1__["default"].commit('LOG_OUT');
+      _Router_index__WEBPACK_IMPORTED_MODULE_2__["default"].push('login')["catch"](function () {});
     }
 
     return Promise.reject(error);
@@ -2771,6 +2799,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+axios.defaults.baseURL = "http://127.0.0.1:8000";
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 /**

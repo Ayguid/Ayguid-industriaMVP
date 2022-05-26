@@ -2,24 +2,24 @@
 import interceptorsSetup from './interceptor'
 interceptorsSetup()
 //
-const entryPoint = ""//process.env.MIX_APP_URL "http://127.0.0.1:8000"
+//const entryPoint = ""//process.env.MIX_APP_URL "http://127.0.0.1:8000"
 //console.log(entryPoint)
 //
 const actions = {
 
   async getMainData({ commit }) {
-    const res = await axios.get(entryPoint + '/api/mainData')
+    const res = await axios.get('/api/categories')
     commit('SET_MAIN_DATA', res.data)
     //console.log(res);
   },
   async storeCategory({ commit }, payload) {
-    const res = await axios.post(entryPoint + '/api/storeCategory', payload)
+    const res = await axios.post('/api/storeCategory', payload)
     //commit('SET_MAIN_DATA', res.data)
     //console.log(res);
     return res;
   },
   async updateCategory({ commit }, payload) {
-    const res = await axios.post(entryPoint + '/api/updateCategory', payload)
+    const res = await axios.post('/api/updateCategory', payload)
     //commit('SET_MAIN_DATA', res.data)
     //console.log(res);
     return res;
